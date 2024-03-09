@@ -1,8 +1,8 @@
 {
-  "name": "timestamp-microservice",
+  "name": "request-header-parser",
   "version": "1.0.0",
   "main": "dist/main.js",
-  "repository": "https://github.com/abril927/fcc-timestamp-microservice",
+  "repository": "https://github.com/abril927/fcc-request-header-parser",
   "author": "Abril <abril927@proton.me>",
   "license": "UNLICENSED",
   "packageManager": "yarn@4.1.1",
