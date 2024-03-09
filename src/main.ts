@@ -6,27 +6,18 @@ import { default as cors } from 'cors';
 
 let app = express();
 app.use(cors({ optionsSuccessStatus: 200 }));
+app.set('trust proxy', 'loopback');
 
 app.get('/', (req, res) => {
-	res.send('API: /api/:date');
+	res.send('API: /api/whoami');
 });
 
-app.get('/api/:date?', (req, res) => {
-	const date = req.params.date;
-	let parsed: Date;
-	if (date != null) {
-		parsed = new Date(date);
-		if (isNaN(parsed.getTime())) {
-			parsed = new Date(parseInt(date));
-			if (isNaN(parsed.getTime())) {
-				return res.json({ error: 'Invalid Date' });
-			}
-		}
-	} else {
-		parsed = new Date();
-	}
-	
-	return res.json({ unix: parsed.getTime(), utc: parsed.toUTCString() });
+app.get('/api/whoami', (req, res) => {
+	return res.json({
+		ipaddress: req.ip,
+		language: req.headers['accept-language'],
+		software: req.headers['user-agent']
+	});
 });
 
 app.listen(process.env.PORT || 3000, () => {
